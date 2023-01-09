@@ -23,7 +23,6 @@ import {
   setUserRegisteredActivities
 } from '../../../../actions/activities';
 import { getTimeString } from '../../../../scripts/datetime-formats';
-import { fontSize } from '@material-ui/system';
 
 const useStyles = makeStyles(theme => ({
   activity: {
