@@ -19,6 +19,7 @@ namespace Matchmaker
     {
         public Startup(IConfiguration configuration)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             Configuration = configuration;
         }
 
