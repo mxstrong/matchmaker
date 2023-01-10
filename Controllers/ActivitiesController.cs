@@ -31,8 +31,8 @@ namespace Matchmaker.Controllers
         public async Task<List<ActivityDto>> GetActivities()
         {
             var activities = await _context.Activities.Where(a => a.Date > DateTime.Now)
-                .Select(a => ActivityDto.FromActivity(a))
                 .OrderBy(activity => activity.Date)
+                .Select(a => ActivityDto.FromActivity(a))
                 .ToListAsync();
 
             return activities;
