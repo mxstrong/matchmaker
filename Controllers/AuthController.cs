@@ -102,12 +102,8 @@ namespace Matchmaker.Controllers
         public async Task<IActionResult> Activate(string tokenId)
         {
             var user = await _repo.ActivateUser(tokenId);
-            if (user.Activated)
-            {
-                
-                return Redirect(Urls.LoginUrl);
-            }
-            return BadRequest("Wrong activation token");
+            if (user is null || !user.Activated) return BadRequest("Wrong activation token");
+            return Redirect(Urls.LoginUrl);
         }
 
         [Authorize(Roles = Role.SuperAdmin)]
