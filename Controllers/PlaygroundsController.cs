@@ -26,14 +26,17 @@ namespace Matchmaker.Controllers
         [HttpGet]
         public async Task<List<PlaygroundDto>> GetPlaygrounds()
         {
-            var playgrounds = await _context.Playgrounds.Select(p => new PlaygroundDto()
+            var playgrounds = await _context.Playgrounds.ToListAsync();
+            
+            var playgroundsDtos = playgrounds.Select(p => new PlaygroundDto()
             {
                 Id = p.PlaygroundId,
                 Name = p.NameOfPlace,
                 Size = p.Size
-            }).ToListAsync();
+            })
+            .ToList();
 
-            return playgrounds;
+            return playgroundsDtos;
         }
 
         // GET: api/Playgrounds/5

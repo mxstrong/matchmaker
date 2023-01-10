@@ -32,11 +32,11 @@ namespace Matchmaker.Controllers
         {
             var activities = await _context.Activities.Where(a => a.Date > DateTime.Now)
                 .OrderBy(activity => activity.Date)
-                .ToListAsync()
-                .Select(a => ActivityDto.FromActivity(a))
                 .ToListAsync();
 
-            return activities;
+            var activityDtos = activities.Select(a => ActivityDto.FromActivity(a)).ToList();
+
+            return activityDtos;
         }
 
         // GET: api/Activities/5

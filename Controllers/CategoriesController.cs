@@ -25,15 +25,19 @@ namespace Matchmaker.Controllers
         // GET: api/Categories
         [AllowAnonymous]
         [HttpGet]
-        public Task<List<CategoryDto>> GetCategories()
+        public async Task<List<CategoryDto>> GetCategories()
         {
-            var categories = _context.Categories.Select(c => new CategoryDto()
+            var categories = await _context.Categories.ToListAsync();
+            
+            var categoryDtos = categories
+                .Select(c => new CategoryDto()
             {
                 Id = c.CategoryId,
                 Name = c.Name
-            }).ToListAsync();
+            })
+            .ToList();
                              
-            return categories;
+            return categoryDtos;
         }
 
         // GET: api/Categories/5

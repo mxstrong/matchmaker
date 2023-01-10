@@ -26,14 +26,18 @@ namespace Matchmaker.Controllers
         [HttpGet]
         public async Task<List<SportsCenterDto>> GetSportsCenters()
         {
-            var sportsCenters = await _context.SportsCenters.Select(s => new SportsCenterDto()
+            var sportsCenters = await _context.SportsCenters.ToListAsync();
+            
+            var sportsCentersDtos = sportsCenters
+                .Select(s => new SportsCenterDto()
             {
                 Id = s.SportsCenterId,
                 Name = s.Name,
                 Address = s.Address
-            }).ToListAsync();
+            })
+            .ToList();
 
-            return sportsCenters;
+            return sportsCentersDtos;
         }
 
         // GET: api/SportsCenters/5
